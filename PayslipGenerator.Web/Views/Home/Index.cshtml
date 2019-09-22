@@ -1,0 +1,104 @@
+﻿@model InputViewModel
+@{
+
+    var Results = Model.PaySlips != null;
+}
+@{
+    ViewData["Title"] = "Payslip Home Page";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Generates Payslip using Employee file import</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <form method="post" enctype="multipart/form-data" asp-action="Index">
+            <div class="form-group">
+                <label asp-for="EmployeeInput" class="control-label">Employee Input</label>
+                <input asp-for="EmployeeInput" type="file" class="form-control" />
+                <span asp-validation-for="EmployeeInput" class="text-danger"></span>
+                <p>
+                    <em>All files should be in CSV format.</em>
+                </p>
+            </div>
+            @if (!String.IsNullOrEmpty(Model.Errors))
+            {
+                <p class="text-danger">@Model.Errors</p>
+            }
+            <div class="form-group">
+                <input type="submit" value="Generate Payslips" class="btn btn-success" />
+            </div>
+            @if (Results)
+            {
+                <p>@Html.ActionLink("Download Payslips", "DownloadFile", "Home", null, new { @class = "btn btn-info" })</p>
+            }
+
+        </form>
+    </div>
+
+    <div class="col-md-10">
+        @if (Model.Employees != null)
+        {
+            <h3>Employees</h3>
+            <p>
+                <span></span>
+            </p>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Annual Salary</th>
+                        <th scope="col">Super Rate(%)</th>
+                        <th scope="col">Payment Start Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var e in Model.Employees)
+                    {
+                        <tr>
+                            <td><span>@e.FirstName</span></td>
+                            <td><span>@e.LastName</span></td>
+                            <td><span>@e.AnnualSalary</span></td>
+                            <td><span>@e.SuperRate</span></td>
+                            <td><span>@e.PaymentStartDate</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        @if (Results)
+        {
+            <h2>Employee Payslips</h2>          
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Payment Period</th>
+                        <th>Gross Income</th>
+                        <th>Income Tax</th>
+                        <th>Net Income</th>
+                        <th>Super Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model.PaySlips)
+                    {
+                        <tr>
+                            <td>@r.Name</td>
+                            <td>@r.PayPeriod</td>
+                            <td>@r.GrossIncome</td>
+                            <td>@r.IncomeTax</td>
+                            <td>@r.NetIncome</td>
+                            <td>@r.Super</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+
+</div>
