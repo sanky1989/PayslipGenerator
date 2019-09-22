@@ -27,4 +27,4 @@ Run the test project by running project PayslipGenerator.Test.
 
 -Microsoft Extensions logging Abstraction tool to log information.
 
-- Xunit class to do unit and integration testing.
+-Xunit class to do unit and integration testing.
