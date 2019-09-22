@@ -16,7 +16,7 @@ Incomplete months will not be considered as valid.
 # Run the project
 Launch the project PayslipGenerator.Web using IIS or local hosting.
 
-Use the input file located at following location PayslipGenerator.Test/TestDocument
+Use the input file located at following location PayslipGenerator.Test/TestDocument/EmployeeDetails.csv
 
 # Test 
 Run the test project by running project PayslipGenerator.Test.
