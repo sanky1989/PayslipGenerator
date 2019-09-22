@@ -14,15 +14,17 @@ Annual Salary should be non negative number, super rate is followed by % and Pay
 Incomplete months will not be considered as valid.
 
 # Run the project
-Launch the project PayslipGenerator.Web using IIS or local hosting
+Launch the project PayslipGenerator.Web using IIS or local hosting.
 
 Use the input file located at following location PayslipGenerator.Test/TestDocument
 
 # Test 
-Run the test project by running project PayslipGenerator.Test
+Run the test project by running project PayslipGenerator.Test.
 
 # External Assemblies
 
 -CSV helper to reading/writing csv file format.
 
 -Microsoft Extensions logging Abstraction tool to log information.
+
+- Xunit class to do unit and integration testing.
