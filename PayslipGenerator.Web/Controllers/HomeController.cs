@@ -9,6 +9,7 @@ using PayslipGenerator.Service;
 using Microsoft.Extensions.Logging;
 using PayslipGenerator.Model;
 using Microsoft.AspNetCore.Http;
+using System.Text.RegularExpressions;
 
 namespace PayslipGenerator.Web.Controllers
 {
@@ -40,6 +41,13 @@ namespace PayslipGenerator.Web.Controllers
                 return View(viewModel);
             }
 
+            string fileType = viewModel.EmployeeInput.ContentType;
+            string fileName = viewModel.EmployeeInput.FileName;
+            if (fileType != "application/vnd.ms-excel" || !Regex.IsMatch(fileName.ToLower(),@"\b.csv\b")) //!fileName.Contains(".csv"))
+            {
+                viewModel.Errors = "Some errors were detected in your submission. Please correct any field errors and re-submit.";
+                return View(viewModel);
+            }
             var employees = ReadEmployeesFromViewModel(viewModel);
             if (employees != null)
             {
